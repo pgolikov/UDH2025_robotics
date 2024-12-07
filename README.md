@@ -20,10 +20,9 @@ The objective of this hackathon is to develop a mission planning system for a sw
 * Scripts for controlling a seismic drone will be provided.
 
 ## Input Data:
-* The input data for the challenge is stored in the ./input_data/ folder.
 * The following input is provided: 
-    * The mission planning system will utilize orthomosaic maps and Digital Elevation Models (DEM) in GeoTIFF format. 
-    * Preplan geometry of recording points on a regular 10x10m grid.
+    * The mission planning system will utilize orthomosaic maps and Digital Elevation Models (DEM) in GeoTIFF format. It can be downloaded using [this link](https://www.dropbox.com/scl/fo/7wknt8y1o21nywsznn74d/AAxhbd2WGdAOrqduDDFYJns?rlkey=i6592rop9aja25suadp98kmb6&dl=0)
+    * Preplan geometry of recording points on a regular 10x10m grid stored in ```./input_data/preplan.csv```.
     * Coordinates for the start area for the drone swarm and designated service areas for battery exchanges.
 
 ## Expected Deliverables: 
