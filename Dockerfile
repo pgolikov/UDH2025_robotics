@@ -54,8 +54,9 @@ RUN sudo git clone --depth 1 --branch $PX4_TAG --recurse-submodules https://gith
 RUN git config --global --add safe.directory /home/sim/PX4-Autopilot
 
 # Clone documentation and workspace 
-WORKDIR $HOME
-RUN sudo git clone --depth 1 --recurse-submodules https://github.com/pgolikov/UDH2025_robotics.git
+# WORKDIR $HOME
+# RUN sudo git clone --depth 1 --recurse-submodules https://github.com/pgolikov/UDH2025_robotics.git
+# RUN git config --global --add safe.directory /home/sim/UDH2025_robotics
 
 # ROS vars
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
