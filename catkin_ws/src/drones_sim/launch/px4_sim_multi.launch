@@ -1,0 +1,10 @@
+<launch>
+	<!-- example launch script for PX4 based FCU's -->
+	<arg name="n_drones" default="1"/>
+
+	<!-- UAV instances -->
+    <include file="$(find drones_sim)/launch/px4_sim_recursed.launch">
+        <arg name="n" value="$(eval int(arg('n_drones')))"/>
+    </include>
+
+</launch>

@@ -39,7 +39,6 @@ RUN adduser --disabled-password --gecos '' $UNAME
 RUN adduser $UNAME sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 ENV HOME=/home/$UNAME
-
 USER $UNAME
 
 # ROS vars
@@ -54,9 +53,13 @@ WORKDIR $HOME
 RUN sudo git clone --depth 1 --branch $PX4_TAG --recurse-submodules https://github.com/PX4/PX4-Autopilot.git
 RUN git config --global --add safe.directory /home/sim/PX4-Autopilot
 
+# Clone documentation and workspace 
+WORKDIR $HOME
+RUN sudo git clone --depth 1 --recurse-submodules https://github.com/pgolikov/UDH2025_robotics.git
+
 # ROS vars
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
-    echo "source ~/catkin_ws/devel/setup.bash --extend" >> ~/.bashrc
+    echo "source ~/UDH2025_robotics/catkin_ws/devel/setup.bash --extend" >> ~/.bashrc
 
 # Nvidia GPU vars
 ENV NVIDIA_VISIBLE_DEVICES=all

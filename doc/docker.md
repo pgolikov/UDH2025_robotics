@@ -7,7 +7,7 @@ docker-compose build
 ```
 
 ### Create an instance of a container from image:
-```
+``` bash
 docker run -it --privileged --ipc=host --net=host \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v ~/.Xauthority:/home/sim/.Xauthority \
@@ -17,7 +17,7 @@ docker run -it --privileged --ipc=host --net=host \
 
 ### In docker 
 
-```
+``` bash
 cd ~/PX4-Autopilot
 make px4_sitl gz_x500
 ```

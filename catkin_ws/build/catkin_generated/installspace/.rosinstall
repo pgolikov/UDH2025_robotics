@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/sim/drone_hack/UDH2025_robotics/catkin_ws/install/setup.sh

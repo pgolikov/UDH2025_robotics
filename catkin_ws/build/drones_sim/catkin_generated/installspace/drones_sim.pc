@@ -1,0 +1,8 @@
+prefix=/home/sim/drone_hack/UDH2025_robotics/catkin_ws/install
+
+Name: drones_sim
+Description: Description of drones_sim
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

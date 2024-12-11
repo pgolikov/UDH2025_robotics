@@ -21,7 +21,6 @@ services:
         volumes:
             - "/tmp/.X11-unix:/tmp/.X11-unix"
             - ~/.Xauthority:/home/sim/.Xauthority
-            - /home/vs/drone_hack/catkin_ws:/home/sim/drone_hack/catkin_ws:rw # worksapce with script #TODO: git clone
         ports:
             - "14540-14550:14540-14550/udp"
             - "14570:14570/udp"
