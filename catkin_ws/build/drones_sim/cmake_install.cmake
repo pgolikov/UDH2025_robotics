@@ -1,8 +1,8 @@
-# Install script for directory: /home/sim/drone_hack/UDH2025_robotics/catkin_ws/src/drones_sim
+# Install script for directory: /home/sim/UDH2025_robotics/catkin_ws/src/drones_sim
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/sim/drone_hack/UDH2025_robotics/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/sim/UDH2025_robotics/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sim/drone_hack/UDH2025_robotics/catkin_ws/build/drones_sim/catkin_generated/installspace/drones_sim.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/sim/UDH2025_robotics/catkin_ws/build/drones_sim/catkin_generated/installspace/drones_sim.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/drones_sim/cmake" TYPE FILE FILES
-    "/home/sim/drone_hack/UDH2025_robotics/catkin_ws/build/drones_sim/catkin_generated/installspace/drones_simConfig.cmake"
-    "/home/sim/drone_hack/UDH2025_robotics/catkin_ws/build/drones_sim/catkin_generated/installspace/drones_simConfig-version.cmake"
+    "/home/sim/UDH2025_robotics/catkin_ws/build/drones_sim/catkin_generated/installspace/drones_simConfig.cmake"
+    "/home/sim/UDH2025_robotics/catkin_ws/build/drones_sim/catkin_generated/installspace/drones_simConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/drones_sim" TYPE FILE FILES "/home/sim/drone_hack/UDH2025_robotics/catkin_ws/src/drones_sim/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/drones_sim" TYPE FILE FILES "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/package.xml")
 endif()
 

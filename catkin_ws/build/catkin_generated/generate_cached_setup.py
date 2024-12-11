@@ -12,16 +12,16 @@ try:
     from catkin.environment_cache import generate_environment_script
 except ImportError:
     # search for catkin package in all workspaces and prepend to path
-    for workspace in '/home/sim/drone_hack/catkin_ws/devel;/opt/ros/noetic'.split(';'):
+    for workspace in '/home/sim/UDH2025_robotics/catkin_ws/devel;/opt/ros/noetic'.split(';'):
         python_path = os.path.join(workspace, 'lib/python3/dist-packages')
         if os.path.isdir(os.path.join(python_path, 'catkin')):
             sys.path.insert(0, python_path)
             break
     from catkin.environment_cache import generate_environment_script
 
-code = generate_environment_script('/home/sim/drone_hack/UDH2025_robotics/catkin_ws/devel/env.sh')
+code = generate_environment_script('/home/sim/UDH2025_robotics/catkin_ws/devel/env.sh')
 
-output_filename = '/home/sim/drone_hack/UDH2025_robotics/catkin_ws/build/catkin_generated/setup_cached.sh'
+output_filename = '/home/sim/UDH2025_robotics/catkin_ws/build/catkin_generated/setup_cached.sh'
 with open(output_filename, 'w') as f:
     # print('Generate script for cached setup "%s"' % output_filename)
     f.write('\n'.join(code))

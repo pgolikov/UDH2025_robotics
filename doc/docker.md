@@ -9,11 +9,12 @@ docker-compose build
 ### Create an instance of a container from image:
 ``` bash
 docker run -it --privileged --ipc=host --net=host \
-    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    -v ~/.Xauthority:/home/sim/.Xauthority \
-    -v /home/vs/uav-flight-simulation-master:/home/sim/uav-flight-simulation-master:rw \
-    -e DISPLAY=$DISPLAY -p 14570:14570/udp --name=px4 uav-flight-simulation-master-drone_sim:latest bash
+-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+-v ~/.Xauthority:/home/sim/.Xauthority \
+-v /home/vs/drone_hack/UDH2025_robotics:/home/sim/UDH2025_robotics:rw \
+-e DISPLAY=$DISPLAY -p 14570:14570/udp --name=px4 udh2025_robotics-drone_sim:latest bash
 ```
+
 
 ### In docker 
 
