@@ -17,11 +17,20 @@ Launch px4 sessions
 To attach to a specific tmux session (e.g., drone_1), use the following command:
 
 ``` bash
-tmux attach-session -t drone_1
+sudo tmux list-sessions
 ```
 
 ``` bash
-tmux list-sessions
+sudo tmux attach-session -t drone_1
+```
+
+
+``` bash
+roslaunch drones_sim px4_sim_recursed.launch
+```
+
+``` bash
+xhost +local:docker
 ```
 
 Detach from the Session:

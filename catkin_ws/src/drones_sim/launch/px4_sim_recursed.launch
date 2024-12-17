@@ -1,7 +1,8 @@
 <launch>
+	<!-- Number of drones -->
 	<arg name="n" default="3"/> 
 
-	<!-- start px4 -->
+	<!-- Start px4 -->
 	<group ns="$(eval 'uav' + str(arg('n')))">
 		<arg name="fcu_url" default="$(eval 'udp://:' + str(14540+arg('n')) + '@localhost:' + str(14580+arg('n')))"/>
 		<arg name="gcs_url" default=""/>
@@ -19,8 +20,13 @@
 		</include>
 	</group>
 
-	<!-- recursively start new node -->
-	<include file="$(find drones_sim)/launch/px4_sim_recursed.launch" if="$(eval arg('n') - 1 > -1)">
+    <!-- Run the drone control script for each drone -->
+    <node pkg="drones_sim" name="drone_$(arg n)" type="mission_drone.py" output="screen">
+        <param name="drone" value="$(arg n)" />
+    </node>
+
+	<!-- Recursively start new node -->
+	<include file="$(find drones_sim)/launch/px4_sim_recursed.launch" if="$(eval arg('n') - 1 > 0)">
 		<arg name="n" value="$(eval arg('n') - 1)"/>
 	</include>
 

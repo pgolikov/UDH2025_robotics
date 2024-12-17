@@ -22,3 +22,8 @@ docker run -it --privileged --ipc=host --net=host \
 cd ~/PX4-Autopilot
 make px4_sitl gz_x500
 ```
+
+#### Run a particular command in container (outside it):
+``` bash
+docker exec -it px4 bash
+```
