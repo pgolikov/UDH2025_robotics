@@ -21,7 +21,7 @@
 	</group>
 
     <!-- Run the drone control script for each drone -->
-    <node pkg="drones_sim" name="drone_$(arg n)" type="mission_drone.py" output="screen">
+    <node pkg="drones_sim" name="drone_$(arg n)" type="px4_drone_2.py" output="screen">
         <param name="drone" value="$(arg n)" />
     </node>
 

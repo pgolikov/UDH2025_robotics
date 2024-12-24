@@ -6,7 +6,7 @@ ARG UNAME=sim
 ARG USE_NVIDIA=1
 
 # Dependencies
-RUN apt-get update \
+RUN sudo apt-get update \
     && apt-get install -y -qq --no-install-recommends \
     python-is-python3 \
     apt-utils \
@@ -52,11 +52,6 @@ ARG PX4_TAG="v1.15.2"
 WORKDIR $HOME
 RUN sudo git clone --depth 1 --branch $PX4_TAG --recurse-submodules https://github.com/PX4/PX4-Autopilot.git
 RUN git config --global --add safe.directory /home/sim/PX4-Autopilot
-
-# Clone documentation and workspace 
-# WORKDIR $HOME
-# RUN sudo git clone --depth 1 --recurse-submodules https://github.com/pgolikov/UDH2025_robotics.git
-# RUN git config --global --add safe.directory /home/sim/UDH2025_robotics
 
 # ROS vars
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \

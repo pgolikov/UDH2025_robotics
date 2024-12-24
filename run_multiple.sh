@@ -23,7 +23,7 @@ for n in $(seq 0 $((N-1))); do
     Y=$((ROW * STEP))             # Calculate y-coordinate
     
     sudo tmux new-session -d -s "drone_$((n+1))" "PX4_SYS_AUTOSTART=4001 PX4_GZ_MODEL_POSE=\"$X,$Y\" PX4_SIM_MODEL=gz_x500 ./build/px4_sitl_default/bin/px4 -i $((n+1))"
-    sleep 5
+    sleep 4
 done
 
 echo "Launched $N PX4 instances in a grid (${ROWS} rows, ${COLS} columns) with a step of $STEP."

@@ -5,6 +5,7 @@ from geometry_msgs.msg import PoseStamped
 from mavros_msgs.msg import State 
 from mavros_msgs.srv import CommandBool, SetMode
 from tf.transformations import *
+from std_msgs.msg import Header
 
 import numpy as np
 from numpy.linalg import norm
@@ -16,8 +17,7 @@ class Drone:
         self.uav_name = str(drone_id)
         rospy.logwarn("INIT-" + self.uav_name + "-DRONE")
 
-        self.hz = 10
-        self.rate = rospy.Rate(self.hz)
+        self.rate = rospy.Rate(20)
 
         self.current_state = State() # Current autopilot state
         self.pose = None # current drone pose
@@ -29,6 +29,25 @@ class Drone:
 
         rospy.Subscriber('/uav' + self.uav_name +'/mavros/state', State, self.state_callback)
         rospy.Subscriber('/uav' + self.uav_name +'/mavros/local_position/pose', PoseStamped, self.drone_pose_callback)
+
+        # Wait for MAVROS services
+        rospy.wait_for_service('/uav' + self.uav_name + '/mavros/cmd/arming')
+        rospy.wait_for_service('/uav' + self.uav_name + '/mavros/set_mode')
+
+        # Ensure the FCU is connected
+        while not rospy.is_shutdown() and not self.current_state.connected:
+            rospy.loginfo("Waiting for FCU connection...")
+            self.rate.sleep()
+
+        rospy.loginfo("FCU connected!")
+
+        # Send a few setpoints to prepare for OFFBOARD mode
+        rospy.loginfo("Sending initial setpoints...")
+        self.publish_setpoint([0, 0, 2.0], 5)  # Publish setpoints for 5 seconds
+
+        # Set OFFBOARD mode and arm the vehicle
+        self.set_mode("OFFBOARD")
+
         
 
     # --- CALLBACK FUNCTIONS ---
@@ -42,9 +61,6 @@ class Drone:
     def arm(self): # OK
         self.current_status = 'Arming'
         rospy.logwarn(self.uav_name + self.current_status)
-
-        for i in range(self.hz):
-            self.rate.sleep()
     
         # wait for FCU connection
         while not self.current_state.connected:
@@ -89,6 +105,16 @@ class Drone:
         self.current_status = "Hover"
         print(self.uav_name, ' ', self.current_status)
         
+    # def takeoff(local_pos_pub, altitude):
+    #     """Handles the takeoff sequence."""
+    #     rospy.loginfo("Taking off...")
+    #     takeoff_pose = PoseStamped()
+    #     takeoff_pose.header = Header()
+    #     takeoff_pose.pose.position.x = 0
+    #     takeoff_pose.pose.position.y = 0
+    #     takeoff_pose.pose.position.z = altitude
+    #     publish_setpoints(local_pos_pub, takeoff_pose, 10)  # Hover for 10 seconds
+
     def hover(self, t_hold): # OK
         print('Position holding...')
         t0 = time.time()
@@ -99,6 +125,18 @@ class Drone:
             # Update timestamp and publish sp 
             self.publish_setpoint(sp)
             self.rate.sleep()
+
+    def set_mode(self, mode):
+        """Sets the vehicle's mode."""
+        prev_request = rospy.get_time()
+        now = rospy.get_time()
+        if self.current_state.mode != mode and (now - prev_request > 2.):
+            self.set_mode_client(base_mode=0, custom_mode=mode)
+            prev_request = now 
+        else:
+            if not self.current_state.armed and (now - prev_request > 2.):
+                self.arming_client(True)
+                prev_request = now 
 
     def land(self): # OK
         print(self.uav_name, " Landing...")
@@ -138,7 +176,7 @@ class Drone:
         set_pose.pose.orientation.w = q[3]
         return set_pose
         
-    def publish_setpoint(self, sp, yaw=0): #yaw=np.pi/2
+    def publish_setpoint(self, sp, yaw=0):
         setpoint = self.get_setpoint(sp[0], sp[1], sp[2], yaw)
         setpoint.header.stamp = rospy.Time.now()
         self.setpoint_publisher.publish(setpoint)

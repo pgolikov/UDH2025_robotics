@@ -21,7 +21,7 @@ services:
         volumes:
             - "/tmp/.X11-unix:/tmp/.X11-unix"
             - ~/.Xauthority:/home/sim/.Xauthority
-            - /home/vs/drone_hack/UDH2025_robotics:/home/sim/UDH2025_robotics:rw # worksapce with script #TODO: git clone
+            - ./:/home/sim/UDH2025_robotics:rw
         ports:
             - "14540-14550:14540-14550/udp"
             - "14570:14570/udp"

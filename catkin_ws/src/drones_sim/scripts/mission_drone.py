@@ -62,19 +62,12 @@ class DroneMission:
                 yaw_input = float(param_command.param2)
                 self.drone.goTo(point, mode=m, yaw=yaw_input)
 
-    def autonomous_mission(self):
-        self.drone.arm()
-        self.drone.takeoff(5.0)
-        self.drone.hover(5.0)
-        self.drone.land()
-
 
 if __name__ == '__main__':
     rospy.sleep(4)
     rospy.init_node('drone_control', anonymous=True)
 
     mission = DroneMission()
-    mission.autonomous_mission()
 
     while not rospy.is_shutdown():
         rospy.spin()
