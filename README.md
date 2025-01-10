@@ -23,6 +23,7 @@ The objective of this hackathon is to develop a mission planning system for a sw
 * The following input is provided: 
     * The mission planning system will utilize orthomosaic maps and Digital Elevation Models (DEM) in GeoTIFF format. It can be downloaded using [this link](https://www.dropbox.com/scl/fo/7wknt8y1o21nywsznn74d/AAxhbd2WGdAOrqduDDFYJns?rlkey=i6592rop9aja25suadp98kmb6&dl=0)
     * Preplan geometry of recording points on a regular 5x5m grid stored in ```./input_data/preplan_geom.csv```.
+    * Subset of preplan geometry regular 10x10m grid stored in ```./input_data/preplan_geom_lim_10m.csv```.
 
 ## Expected Deliverables: 
 
