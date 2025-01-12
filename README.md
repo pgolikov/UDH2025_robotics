@@ -17,6 +17,7 @@ The objective of this hackathon is to develop a mission planning system for a sw
 
 ## Environment:
 * Participants will utilize the Docker container with Gazebo simulation environment, ROS, Mavros, PX4-autopilot to test and validate their mission planning systems.
+* Each team use swarm of 20 drones in Gazebo
 * Scripts for controlling a seismic drone will be provided.
 
 ## Input Data:
@@ -24,6 +25,15 @@ The objective of this hackathon is to develop a mission planning system for a sw
     * The mission planning system will utilize orthomosaic maps and Digital Elevation Models (DEM) in GeoTIFF format. It can be downloaded using [this link](https://www.dropbox.com/scl/fo/7wknt8y1o21nywsznn74d/AAxhbd2WGdAOrqduDDFYJns?rlkey=i6592rop9aja25suadp98kmb6&dl=0)
     * Preplan geometry of recording points on a regular 5x5m grid stored in ```./input_data/preplan_geom.csv```.
     * Subset of preplan geometry regular 10x10m grid stored in ```./input_data/preplan_geom_lim_10m.csv```.
+
+## List of tasks
+1. Clone github repository and build Docker container
+2. Import topography data into Gazebo
+3. Filter preplan geometry (subset 10x10 grid) removing points that cannot be surveied: 
+    * Slope angle > 15deg
+    * Farms
+    * Houses
+4. Generate flight mission to seurvey all filtered recording position with swarm of 20 drones with condition: all drones are listening for 20 seconds at the same time. The choise of recording position is entirely up to you. 
 
 ## Expected Deliverables: 
 
