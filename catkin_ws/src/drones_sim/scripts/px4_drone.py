@@ -1,32 +1,29 @@
 #!/usr/bin/env python3
 
 import rospy
-from geometry_msgs.msg import PoseStamped
-from mavros_msgs.msg import State 
 from mavros_msgs.srv import CommandBool, SetMode
-from tf.transformations import *
+from mavros_msgs.msg import State
+from geometry_msgs.msg import PoseStamped
 from std_msgs.msg import Header
-
-import numpy as np
-from numpy.linalg import norm
-import time
+from geographic_msgs.msg import GeoPoseStamped
 
 class Drone:
-    def __init__(self, drone_id):
-
-        self.uav_name = str(drone_id)
-        rospy.logwarn("INIT-" + self.uav_name + "-DRONE")
-
+    def __init__(self):
         self.rate = rospy.Rate(20)
+        self.uav_name = str(rospy.get_param(rospy.get_name() + '/drone'))
+        rospy.loginfo("INIT-" + self.uav_name + "-DRONE")
 
         self.current_state = State() # Current autopilot state
-        self.pose = None # current drone pose
-        self.current_status = "Init" # Drone state: Init, Arming, TakeOff, Hover, Landing, Grounded, Recording
+        self.current_pose = PoseStamped() 
 
+        # Publishers
+        self.local_pos_pub = rospy.Publisher('/uav' + self.uav_name + '/mavros/setpoint_position/local', PoseStamped, queue_size=10)
+        self.global_pos_pub = rospy.Publisher('/uav' + self.uav_name + '/mavros/setpoint_position/global', GeoPoseStamped, queue_size=10)
         self.setpoint_publisher = rospy.Publisher('/uav' + self.uav_name + '/mavros/setpoint_position/local', PoseStamped, queue_size=10)
         self.arming_client = rospy.ServiceProxy('/uav' + self.uav_name +'/mavros/cmd/arming', CommandBool)
         self.set_mode_client = rospy.ServiceProxy('/uav' + self.uav_name +'/mavros/set_mode', SetMode, self.state_callback)
 
+        # Subscribers
         rospy.Subscriber('/uav' + self.uav_name +'/mavros/state', State, self.state_callback)
         rospy.Subscriber('/uav' + self.uav_name +'/mavros/local_position/pose', PoseStamped, self.drone_pose_callback)
 
@@ -38,164 +35,139 @@ class Drone:
         while not rospy.is_shutdown() and not self.current_state.connected:
             rospy.loginfo("Waiting for FCU connection...")
             self.rate.sleep()
-
         rospy.loginfo("FCU connected!")
 
         # Send a few setpoints to prepare for OFFBOARD mode
         rospy.loginfo("Sending initial setpoints...")
-        self.publish_setpoint([0, 0, 2.0], 5)  # Publish setpoints for 5 seconds
+        self.publish_setpoints([0, 0, 1.0], 5)  # Publish setpoints for 5 seconds
 
         # Set OFFBOARD mode and arm the vehicle
         self.set_mode("OFFBOARD")
+        rospy.loginfo("READY-" + self.uav_name + "-DRONE")
 
-        
 
-    # --- CALLBACK FUNCTIONS ---
-    def state_callback(self, state):
-        self.current_state = state
+    # Callback to monitor UAV state
+    def state_callback(self, msg):
+        self.current_state = msg    
 
-    def drone_pose_callback(self, pose_msg):
-        self.pose = np.array([ pose_msg.pose.position.x, pose_msg.pose.position.y, pose_msg.pose.position.z ])
+    def drone_pose_callback(self, msg):
+        self.current_pose = msg
 
-    # --- DRONE CONTROL FUNCTIONS ---
-    def arm(self): # OK
-        self.current_status = 'Arming'
-        rospy.logwarn(self.uav_name + self.current_status)
-    
-        # wait for FCU connection
-        while not self.current_state.connected:
-            print('Waiting for FCU connection...')
-            self.rate.sleep()
-
-        prev_request = rospy.get_time()
-        prev_state = self.current_state
-        while not rospy.is_shutdown():
-            now = rospy.get_time()
-            if self.current_state.mode != "OFFBOARD" and (now - prev_request > 2.):
-                self.set_mode_client(base_mode=0, custom_mode="OFFBOARD")
-                prev_request = now 
-            else:
-                if not self.current_state.armed and (now - prev_request > 2.):
-                    self.arming_client(True)
-                    prev_request = now 
-
-            # older versions of PX4 always return success==True, so better to check Status instead
-            if prev_state.armed != self.current_state.armed:
-                print("Vehicle armed: %r" % self.current_state.armed)
-
-            if prev_state.mode != self.current_state.mode: 
-                print("Current mode: %s" % self.current_state.mode)
-            prev_state = self.current_state
-
-            if self.current_state.armed:
-                break
-            # Update timestamp and publish sp 
-            self.publish_setpoint([0,0,-1])
-            self.current_status = 'Armed'
-            self.rate.sleep()
-
-    def takeoff(self, height): # OK
-        self.current_status = 'Takeoff'
-        print(self.uav_name, " Takeoff...", self.pose)
-        sp = self.pose
-        while self.pose[2] < height:
-            sp[2] += 0.05
-            self.publish_setpoint(sp)
-            self.rate.sleep()
-        self.current_status = "Hover"
-        print(self.uav_name, ' ', self.current_status)
-        
-    # def takeoff(local_pos_pub, altitude):
-    #     """Handles the takeoff sequence."""
-    #     rospy.loginfo("Taking off...")
-    #     takeoff_pose = PoseStamped()
-    #     takeoff_pose.header = Header()
-    #     takeoff_pose.pose.position.x = 0
-    #     takeoff_pose.pose.position.y = 0
-    #     takeoff_pose.pose.position.z = altitude
-    #     publish_setpoints(local_pos_pub, takeoff_pose, 10)  # Hover for 10 seconds
-
-    def hover(self, t_hold): # OK
-        print('Position holding...')
-        t0 = time.time()
-        sp = self.pose
-        while not rospy.is_shutdown():
-            t = time.time()
-            if t - t0 > t_hold and t_hold > 0: break
-            # Update timestamp and publish sp 
-            self.publish_setpoint(sp)
-            self.rate.sleep()
+    def arm_vehicle(self):
+        """Arms the vehicle."""
+        if self.arming_client(value=True).success:
+            rospy.loginfo("Vehicle armed!")
+        else:
+            rospy.logwarn("Failed to arm the vehicle!")
 
     def set_mode(self, mode):
         """Sets the vehicle's mode."""
-        prev_request = rospy.get_time()
-        now = rospy.get_time()
-        if self.current_state.mode != mode and (now - prev_request > 2.):
-            self.set_mode_client(base_mode=0, custom_mode=mode)
-            prev_request = now 
+        if self.set_mode_client(custom_mode=mode).mode_sent:
+            rospy.loginfo(f"{mode} mode enabled")
         else:
-            if not self.current_state.armed and (now - prev_request > 2.):
-                self.arming_client(True)
-                prev_request = now 
+            rospy.logwarn(f"Failed to set {mode} mode!")
 
-    def land(self): # OK
-        print(self.uav_name, " Landing...")
-        self.current_status = "Landing"
-        sp = self.pose
-        while sp[2] > - 1.0:
-            sp[2] -= 0.075
-            self.publish_setpoint(sp)
+    def publish_setpoints(self, pose, duration):
+        """Publishes position setpoints for a specific duration."""
+        rate = rospy.Rate(20)  # 20 Hz
+        start_time = rospy.Time.now()
+
+        point = PoseStamped()
+        point.header = Header()
+        point.pose.position.x = pose[0]
+        point.pose.position.y = pose[1]
+        point.pose.position.z = pose[2]
+
+        while not rospy.is_shutdown() and rospy.Time.now() - start_time < rospy.Duration(duration):
+            point.header.stamp = rospy.Time.now()
+            self.local_pos_pub.publish(point)
+            rate.sleep()
+
+    def takeoff(self, altitude):
+        """Handles the takeoff sequence."""
+        rospy.loginfo("Taking off...")
+
+        self.publish_setpoints([self.current_pose.pose.position.x, self.current_pose.pose.position.y, altitude], 10)  # Hover for 10 seconds
+
+    def move_to_local(self, x, y, z, tolerance=0.25):
+        """
+        Moves the drone to a specified local position and waits until it reaches the target within a given tolerance.
+
+        Args:
+            x (float): Target x position (meters).
+            y (float): Target y position (meters).
+            z (float): Target z position (meters).
+            tolerance (float): Position tolerance (meters). Default is 0.2.
+            timeout (float): Maximum time to wait (seconds). Default is 30.
+        """
+        target_pose = PoseStamped()
+        target_pose.pose.position.x = x
+        target_pose.pose.position.y = y
+        target_pose.pose.position.z = z
+
+        start_time = rospy.Time.now()
+
+        while not rospy.is_shutdown():
+            # Publish the target position
+            self.local_pos_pub.publish(target_pose)
+
+            # Get the current position
+            current_x = self.current_pose.pose.position.x
+            current_y = self.current_pose.pose.position.y
+            current_z = self.current_pose.pose.position.z
+
+            # Calculate the Euclidean distance to the target
+            distance = ((current_x - x) ** 2 + (current_y - y) ** 2 + (current_z - z) ** 2) ** 0.5
+
+            # Check if within tolerance
+            if distance <= tolerance:
+                rospy.loginfo(f"Reached target position: x={x}, y={y}, z={z}")
+                return
+
             self.rate.sleep()
-        # self.stop()
-        self.current_status = "Grounded"
-        print(self.uav_name, self.current_status)
 
-    def dis_arm(self):
-        if self.current_state.armed:
-            rospy.loginfo("Disarming")
-            rospy.wait_for_service('/mavros/cmd/arming')
-            try:
-                arming_cl = rospy.ServiceProxy(
-                    '/mavros/cmd/arming', CommandBool)
-                response = arming_cl(value=False)
-                self.current_status = 'landed'
-            except rospy.ServiceException as e:
-                rospy.loginfo("Disarming failed: %s" % e)
+    def move_to_global(self, latitude, longitude, altitude):
+        geo_pose = GeoPoseStamped()
+        geo_pose.pose.position.latitude = latitude
+        geo_pose.pose.position.longitude = longitude
+        geo_pose.pose.position.altitude = altitude
 
-    @staticmethod
-    def get_setpoint(x, y, z, yaw=0): # early yaw=np.pi/2
-        set_pose = PoseStamped()
-        set_pose.pose.position.x = x
-        set_pose.pose.position.y = y
-        set_pose.pose.position.z = z
-        
-        q = quaternion_from_euler(0, 0, yaw)
-        set_pose.pose.orientation.x = q[0]
-        set_pose.pose.orientation.y = q[1]
-        set_pose.pose.orientation.z = q[2]
-        set_pose.pose.orientation.w = q[3]
-        return set_pose
-        
-    def publish_setpoint(self, sp, yaw=0):
-        setpoint = self.get_setpoint(sp[0], sp[1], sp[2], yaw)
-        setpoint.header.stamp = rospy.Time.now()
-        self.setpoint_publisher.publish(setpoint)
+        rate = rospy.Rate(10)  # 10 Hz
+        for _ in range(50):  # Publish setpoints for 5 seconds
+            self.global_pos_pub.publish(geo_pose)
+            print("pubished ", geo_pose)
+            rate.sleep()
 
-    def goTo(self, wp, mode='global', tol=0.25):
-        print("Current setpoint", wp)
+        rospy.loginfo(f"Moving to global position: lat={latitude}, lon={longitude}, alt={altitude}")
 
-        speed_coef = 0.25
 
-        if mode=='global':
-            goal = wp
-        elif mode=='relative':
-            goal = self.pose + wp
+    def land_vehicle(self):
+        """Initiates the landing sequence."""
+        rospy.loginfo("Landing...")
+        self.set_mode("AUTO.LAND")
+        rate = rospy.Rate(10)
+        rospy.loginfo("Waiting for disarm...")
+        while not rospy.is_shutdown() and self.current_state.armed:
+            rate.sleep()
+        rospy.loginfo("Landed and disarmed!")
 
-        print("Going to a waypoint...")
-        sp = self.pose
+    def test(self):
+        self.set_mode("OFFBOARD")
+        self.arm_vehicle()
 
-        while norm(goal - self.pose) > tol:
-            n = (goal - sp) / norm(goal - sp)
-            sp += speed_coef * n
-            self.publish_setpoint(sp)
-            self.rate.sleep()
+        # Takeoff and hover
+        self.takeoff(altitude=5.0)
+
+        # Move to local position (x,y,z)
+        self.move_to_local(0.0, 0.0, 5.0)
+
+        # Land
+        self.land_vehicle()
+
+if __name__ == "__main__":
+    rospy.init_node('drone_control', anonymous=True)
+    try:
+        control = Drone() 
+        control.test()
+    except rospy.ROSInterruptException:
+        pass

@@ -7,7 +7,7 @@
 		<arg name="fcu_url" default="$(eval 'udp://:' + str(14540+arg('n')) + '@localhost:' + str(14580+arg('n')))"/>
 		<arg name="gcs_url" default=""/>
 		<arg name="tgt_component" default="1" />
-		<arg name="log_output" default="screen" />
+		<arg name="log_output" default="log" />
 		
 		<include file="$(find mavros)/launch/node.launch">
 			<arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
@@ -21,7 +21,7 @@
 	</group>
 
     <!-- Run the drone control script for each drone -->
-    <node pkg="drones_sim" name="drone_$(arg n)" type="px4_drone_2.py" output="screen">
+    <node pkg="drones_sim" name="drone_$(arg n)" type="px4_drone.py" output="screen">
         <param name="drone" value="$(arg n)" />
     </node>
 

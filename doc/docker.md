@@ -20,10 +20,10 @@ docker run -it --privileged --ipc=host --net=host \
 -e DISPLAY=$DISPLAY -p 14570:14570/udp --name=px4 udh2025_robotics-drone_sim:latest bash
 ```
 
-### In docker, nuild px4 after instaltaion of doker.
+### In docker, build px4 after instaltaion of doker.
 ``` bash
 cd ~/PX4-Autopilot
-make px4_sitl gz_x500
+sudo make px4_sitl gz_x500
 ```
 
 #### To enter the docker use:
