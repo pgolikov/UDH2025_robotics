@@ -3,8 +3,9 @@ Open repository to store materials for the Advanced Sensing, Robotics and IoT ch
 
 ## Installation Instructions
 
-The installation guide can be found in doc/docker.md.
-For launching the simulation and running the script, refer to doc/sessions.md.
+- The installation guide can be found in doc/docker.md.
+
+- For launching the simulation and running the script, refer to doc/sessions.md.
 
 ## Hackathon Task Description: Mission Planning for Swarm of Seismic Drones
 
