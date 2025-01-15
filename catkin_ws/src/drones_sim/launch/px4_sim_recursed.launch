@@ -1,6 +1,6 @@
 <launch>
 	<!-- Number of drones -->
-	<arg name="n" default="3"/> 
+	<arg name="n" default="1"/> 
 
 	<!-- Start px4 -->
 	<group ns="$(eval 'uav' + str(arg('n')))">
@@ -21,9 +21,9 @@
 	</group>
 
     <!-- Run the drone control script for each drone -->
-    <node pkg="drones_sim" name="drone_$(arg n)" type="px4_drone.py" output="screen">
+    <!-- <node pkg="drones_sim" name="drone_$(arg n)" type="px4_test.py" output="screen">
         <param name="drone" value="$(arg n)" />
-    </node>
+    </node> -->
 
 	<!-- Recursively start new node -->
 	<include file="$(find drones_sim)/launch/px4_sim_recursed.launch" if="$(eval arg('n') - 1 > 0)">

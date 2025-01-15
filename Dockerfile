@@ -47,9 +47,10 @@ RUN echo "export GZ_VERSION='garden'" >> ~/.bashrc
 ENV DISPLAY=:0
 RUN echo $DISPLAY
 
+WORKDIR $HOME
+
 # Load packages
 ARG PX4_TAG="v1.15.2"
-WORKDIR $HOME
 RUN sudo git clone --depth 1 --branch $PX4_TAG --recurse-submodules https://github.com/PX4/PX4-Autopilot.git
 RUN git config --global --add safe.directory /home/sim/PX4-Autopilot
 
@@ -61,6 +62,11 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
 ENV NVIDIA_VISIBLE_DEVICES=all
 ENV NVIDIA_DRIVER_CAPABILITIES=graphics,utility,compute
 RUN if [[ -z "${USE_NVIDIA}" ]] ;\
-    then printf "export QT_GRAPHICSSYSTEM=native" >> /home/${UNAME}/.bashrc ;\
+    then printf "export QT_GRAPHICSSYSTEsudo docker imagesM=native" >> /home/${UNAME}/.bashrc ;\
     else echo "Native rendering support disabled" ;\
     fi
+
+# Add terminal commands
+RUN echo "alias copy_files='sudo cp /home/sim/UDH2025_robotics/world/wadibirk.sdf /home/sim/UDH2025_robotics/catkin_ws/src/sitl_targets_gazebo-classic.cmake /home/sim/PX4-Autopilot/Tools/simulation/gz/worlds'" >> ~/.bashrc && \
+    echo "alias run='/home/sim/UDH2025_robotics/run_multiple.sh 1'" >> ~/.bashrc
+

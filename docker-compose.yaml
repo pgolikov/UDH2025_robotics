@@ -31,4 +31,3 @@ services:
             - "DISPLAY=$DISPLAY"
             - "ROS_HOSTNAME=drone_sim"
             - "ROS_MASTER_URI=http://127.0.0.1:11311"
-        #command: bash

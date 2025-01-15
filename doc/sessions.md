@@ -13,6 +13,7 @@ Launch PX4 ./run_multiple.sh sessions in 'UDH2025_robotics' folder, where N is t
 
 Example for 3 drones:
 ``` bash
+cd UDH2025_robotics
 ./run_multiple.sh 3
 ```
 

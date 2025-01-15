@@ -1,6 +1,11 @@
 # UDH2025_robotics
 Open repository to store materials for the Advanced Sensing, Robotics and IoT challenge at the 2nd Upstream Digital Hackathon
 
+## Installation Instructions
+
+The installation guide can be found in doc/docker.md.
+For launching the simulation and running the script, refer to doc/sessions.md.
+
 ## Hackathon Task Description: Mission Planning for Swarm of Seismic Drones
 
 The objective of this hackathon is to develop a mission planning system for a swarm of seismic drones. Participants will be tasked with creating algorithms that enable the drones to efficiently navigate and conduct seismic surveys over a designated area. The focus will be on optimizing flight paths based on terrain data, while also ensuring safety and coordination among the drones.
