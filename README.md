@@ -7,6 +7,9 @@ Open repository to store materials for the Advanced Sensing, Robotics and IoT ch
 
 - For launching the simulation and running the script, refer to doc/sessions.md.
 
+Video instruction for building docker container ad launching the simulation:
+- https://youtu.be/jMBheYVUH_w
+
 ## Hackathon Task Description: Mission Planning for Swarm of Seismic Drones
 
 The objective of this hackathon is to develop a mission planning system for a swarm of seismic drones. Participants will be tasked with creating algorithms that enable the drones to efficiently navigate and conduct seismic surveys over a designated area. The focus will be on optimizing flight paths based on terrain data, while also ensuring safety and coordination among the drones.

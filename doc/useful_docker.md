@@ -53,6 +53,10 @@ sudo docker ps
 sudo docker rm <CONTAINER_NAME>
 ```
 
+# Remove px4
+sudo docker rm px4
+```
+
 #### Images management commands
 ```
 # Show all

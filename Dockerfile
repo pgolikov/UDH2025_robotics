@@ -68,5 +68,7 @@ RUN if [[ -z "${USE_NVIDIA}" ]] ;\
 
 # Add terminal commands
 RUN echo "alias copy_files='sudo cp /home/sim/UDH2025_robotics/world/wadibirk.sdf /home/sim/UDH2025_robotics/catkin_ws/src/sitl_targets_gazebo-classic.cmake /home/sim/PX4-Autopilot/Tools/simulation/gz/worlds'" >> ~/.bashrc && \
-    echo "alias run='/home/sim/UDH2025_robotics/run_multiple.sh 1'" >> ~/.bashrc
+    echo "alias run='/home/sim/UDH2025_robotics/run_multiple.sh 4'" >> ~/.bashrc && \
+    echo "alias fly='roslaunch drones_sim px4_sim_recursed.launch n:=4'" >> ~/.bashrc && \
+    echo "alias rm_log='rm -rf ~/.ros'" >> ~/.bashrc
 

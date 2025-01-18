@@ -9,7 +9,7 @@ cd UDH2025_robotics
 ### Create an updated image (if Dockerfile have updates)
 
 ```bash
-docker-compose build
+sudo docker-compose build
 ```
 
 ### Allow docker xhost for gui interfaces
@@ -23,7 +23,7 @@ sudo docker run -it --privileged --ipc=host --net=host \
 -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
 -v ~/.Xauthority:/home/sim/.Xauthority \
 -v ./:/home/sim/UDH2025_robotics:rw \
--e DISPLAY=$DISPLAY -p 14570:14570/udp --name=px4 udh2025_robotics_drone_sim:latest bash
+-e DISPLAY=$DISPLAY -p 14570:14570/udp --name=px4 udh2025_robotics-drone_sim:latest bash
 ```
 
 #### To enter the docker use:

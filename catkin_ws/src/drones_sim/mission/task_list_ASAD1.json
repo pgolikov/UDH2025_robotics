@@ -1,0 +1,692 @@
+{
+    "drone_id": 0,
+    "name": "ASAD1",
+    "group": 1,
+    "is_use_sds": 1,
+    "origin_pose": {
+        "lat": 23.2890774,
+        "lon": 46.6662417,
+        "alt": 0.0
+    },
+    "start_loc_pose": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "lat": 23.2890774,
+        "lon": 46.6662417,
+        "alt": 0.0
+    },
+    "sesmic_source_pose": {
+        "lat": -1,
+        "lon": -1,
+        "alt": -1,
+        "x": -1,
+        "y": -1,
+        "z": -1
+    },
+    "task_list": [
+        {
+            "Task_id": 1,
+            "code": 1,
+            "time_start": 0.0,
+            "time_dur": 1.0,
+            "poses": []
+        },
+        {
+            "Task_id": 2,
+            "code": 20,
+            "time_start": 1.0,
+            "time_dur": 13.33,
+            "poses": [
+                {
+                    "id_pose": -1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0.0,
+                    "lat": -1,
+                    "lon": -1,
+                    "alt": -1,
+                    "x_loc": -1,
+                    "y_loc": -1,
+                    "z_loc": 8.0,
+                    "w": -1,
+                    "vel": 0.6
+                }
+            ]
+        },
+        {
+            "Task_id": 2,
+            "code": 10,
+            "time_start": 14.33,
+            "time_dur": 34.95,
+            "poses": [
+                {
+                    "id_pose": 0,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0.0,
+                    "lat": 23.2890774,
+                    "lon": 46.6662417,
+                    "alt": 8.0,
+                    "x_loc": 0.0,
+                    "y_loc": 0.0,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 2.94,
+                    "lat": 23.2890831884,
+                    "lon": 46.666223637,
+                    "alt": 10.19,
+                    "x_loc": 0.64,
+                    "y_loc": -1.85,
+                    "z_loc": 10.19,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 2,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.34,
+                    "lat": 23.289095932,
+                    "lon": 46.6662006338,
+                    "alt": 13.55,
+                    "x_loc": 2.06,
+                    "y_loc": -4.2,
+                    "z_loc": 13.55,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 3,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.15,
+                    "lat": 23.2891168358,
+                    "lon": 46.6661744455,
+                    "alt": 15.69,
+                    "x_loc": 4.39,
+                    "y_loc": -6.88,
+                    "z_loc": 15.69,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 4,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.34,
+                    "lat": 23.2891439783,
+                    "lon": 46.6661442345,
+                    "alt": 16.07,
+                    "x_loc": 7.41,
+                    "y_loc": -9.97,
+                    "z_loc": 16.07,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 5,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.76,
+                    "lat": 23.2891730129,
+                    "lon": 46.6661124333,
+                    "alt": 14.79,
+                    "x_loc": 10.64,
+                    "y_loc": -13.22,
+                    "z_loc": 14.79,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 6,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 5.16,
+                    "lat": 23.2892014192,
+                    "lon": 46.6660804351,
+                    "alt": 12.35,
+                    "x_loc": 13.81,
+                    "y_loc": -16.49,
+                    "z_loc": 12.35,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 7,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.74,
+                    "lat": 23.2892261877,
+                    "lon": 46.6660490818,
+                    "alt": 10.21,
+                    "x_loc": 16.56,
+                    "y_loc": -19.7,
+                    "z_loc": 10.21,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 8,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.52,
+                    "lat": 23.2892515833,
+                    "lon": 46.6660222366,
+                    "alt": 8.0,
+                    "x_loc": 19.39,
+                    "y_loc": -22.44,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                }
+            ]
+        },
+        {
+            "Task_id": 2,
+            "code": 21,
+            "time_start": 49.28,
+            "time_dur": 16.0,
+            "poses": [
+                {
+                    "id_pose": -1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0,
+                    "lat": -1,
+                    "lon": -1,
+                    "alt": -1,
+                    "x_loc": -1,
+                    "y_loc": -1,
+                    "z_loc": -1,
+                    "w": -1,
+                    "vel": 0.5
+                }
+            ]
+        },
+        {
+            "Task_id": 2,
+            "code": 4,
+            "time_start": 65.28,
+            "time_dur": 10.0,
+            "poses": []
+        },
+        {
+            "Task_id": 3,
+            "code": 5,
+            "time_start": 75.28,
+            "time_dur": 10.0,
+            "poses": [
+                {
+                    "id_pose": 0,
+                    "stat_id": 1,
+                    "drone_id": 0,
+                    "id_in_line": -1,
+                    "t": 0,
+                    "lat": 23.2892515647,
+                    "lon": 46.6660221902,
+                    "alt": -1,
+                    "x_loc": 19.39,
+                    "y_loc": -22.44,
+                    "z_loc": 0.0,
+                    "w": -1,
+                    "vel": 0.0
+                }
+            ]
+        },
+        {
+            "Task_id": 4,
+            "code": 6,
+            "time_start": 85.28,
+            "time_dur": 10.0,
+            "poses": []
+        },
+        {
+            "Task_id": 5,
+            "code": 20,
+            "time_start": 95.28,
+            "time_dur": 13.33,
+            "poses": [
+                {
+                    "id_pose": -1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0.0,
+                    "lat": -1,
+                    "lon": -1,
+                    "alt": -1,
+                    "x_loc": -1,
+                    "y_loc": -1,
+                    "z_loc": 8.0,
+                    "w": -1,
+                    "vel": 0.6
+                }
+            ]
+        },
+        {
+            "Task_id": 5,
+            "code": 10,
+            "time_start": 108.62,
+            "time_dur": 34.58,
+            "poses": [
+                {
+                    "id_pose": 0,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0.0,
+                    "lat": 23.2892515833,
+                    "lon": 46.6660222366,
+                    "alt": 8.0,
+                    "x_loc": 19.39,
+                    "y_loc": -22.44,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 2.8,
+                    "lat": 23.2892347632,
+                    "lon": 46.6660019108,
+                    "alt": 8.0,
+                    "x_loc": 17.52,
+                    "y_loc": -24.52,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 2,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 5.06,
+                    "lat": 23.2891990949,
+                    "lon": 46.6659713017,
+                    "alt": 8.0,
+                    "x_loc": 13.55,
+                    "y_loc": -27.65,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 3,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.6,
+                    "lat": 23.2891618499,
+                    "lon": 46.6659519118,
+                    "alt": 8.0,
+                    "x_loc": 9.4,
+                    "y_loc": -29.63,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 4,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.19,
+                    "lat": 23.2891245166,
+                    "lon": 46.6659469623,
+                    "alt": 8.0,
+                    "x_loc": 5.24,
+                    "y_loc": -30.14,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 5,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.18,
+                    "lat": 23.2890871811,
+                    "lon": 46.6659517462,
+                    "alt": 8.0,
+                    "x_loc": 1.09,
+                    "y_loc": -29.65,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 6,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.53,
+                    "lat": 23.2890498673,
+                    "lon": 46.665969454,
+                    "alt": 8.0,
+                    "x_loc": -3.06,
+                    "y_loc": -27.84,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 7,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.78,
+                    "lat": 23.2890129414,
+                    "lon": 46.6659932414,
+                    "alt": 8.0,
+                    "x_loc": -7.18,
+                    "y_loc": -25.4,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 8,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.44,
+                    "lat": 23.2889806514,
+                    "lon": 46.6660188136,
+                    "alt": 8.0,
+                    "x_loc": -10.77,
+                    "y_loc": -22.79,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                }
+            ]
+        },
+        {
+            "Task_id": 5,
+            "code": 21,
+            "time_start": 143.2,
+            "time_dur": 16.0,
+            "poses": [
+                {
+                    "id_pose": -1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0,
+                    "lat": -1,
+                    "lon": -1,
+                    "alt": -1,
+                    "x_loc": -1,
+                    "y_loc": -1,
+                    "z_loc": -1,
+                    "w": -1,
+                    "vel": 0.5
+                }
+            ]
+        },
+        {
+            "Task_id": 5,
+            "code": 4,
+            "time_start": 159.2,
+            "time_dur": 10.0,
+            "poses": []
+        },
+        {
+            "Task_id": 6,
+            "code": 5,
+            "time_start": 169.2,
+            "time_dur": 10.0,
+            "poses": [
+                {
+                    "id_pose": 2,
+                    "stat_id": 7,
+                    "drone_id": 0,
+                    "id_in_line": -1,
+                    "t": 0,
+                    "lat": 23.2889806864,
+                    "lon": 46.666018818,
+                    "alt": -1,
+                    "x_loc": -10.77,
+                    "y_loc": -22.79,
+                    "z_loc": 0.0,
+                    "w": -1,
+                    "vel": 0.0
+                }
+            ]
+        },
+        {
+            "Task_id": 7,
+            "code": 6,
+            "time_start": 179.2,
+            "time_dur": 10.0,
+            "poses": []
+        },
+        {
+            "Task_id": 7,
+            "code": 20,
+            "time_start": 189.2,
+            "time_dur": 13.33,
+            "poses": [
+                {
+                    "id_pose": -1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0.0,
+                    "lat": -1,
+                    "lon": -1,
+                    "alt": -1,
+                    "x_loc": -1,
+                    "y_loc": -1,
+                    "z_loc": 8.0,
+                    "w": -1,
+                    "vel": 0.6
+                }
+            ]
+        },
+        {
+            "Task_id": 7,
+            "code": 10,
+            "time_start": 202.53,
+            "time_dur": 39.47,
+            "poses": [
+                {
+                    "id_pose": 0,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0.0,
+                    "lat": 23.2889806514,
+                    "lon": 46.6660188136,
+                    "alt": 8.0,
+                    "x_loc": -10.77,
+                    "y_loc": -22.79,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 1.84,
+                    "lat": 23.2889906191,
+                    "lon": 46.6660305778,
+                    "alt": 8.84,
+                    "x_loc": -9.66,
+                    "y_loc": -21.59,
+                    "z_loc": 8.84,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 2,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.79,
+                    "lat": 23.2890157266,
+                    "lon": 46.6660580548,
+                    "alt": 11.52,
+                    "x_loc": -6.87,
+                    "y_loc": -18.78,
+                    "z_loc": 11.52,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 3,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 5.16,
+                    "lat": 23.2890433262,
+                    "lon": 46.6660880394,
+                    "alt": 14.32,
+                    "x_loc": -3.79,
+                    "y_loc": -15.71,
+                    "z_loc": 14.32,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 4,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.64,
+                    "lat": 23.2890712433,
+                    "lon": 46.6661175325,
+                    "alt": 16.0,
+                    "x_loc": -0.69,
+                    "y_loc": -12.7,
+                    "z_loc": 16.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 5,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 4.14,
+                    "lat": 23.2890991894,
+                    "lon": 46.6661437606,
+                    "alt": 16.53,
+                    "x_loc": 2.43,
+                    "y_loc": -10.01,
+                    "z_loc": 16.53,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 6,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 3.76,
+                    "lat": 23.28912714,
+                    "lon": 46.6661642136,
+                    "alt": 16.21,
+                    "x_loc": 5.54,
+                    "y_loc": -7.92,
+                    "z_loc": 16.21,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 7,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 3.91,
+                    "lat": 23.2891551223,
+                    "lon": 46.6661824603,
+                    "alt": 14.77,
+                    "x_loc": 8.65,
+                    "y_loc": -6.06,
+                    "z_loc": 14.77,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 8,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 5.02,
+                    "lat": 23.289183354,
+                    "lon": 46.6662075072,
+                    "alt": 11.82,
+                    "x_loc": 11.79,
+                    "y_loc": -3.5,
+                    "z_loc": 11.82,
+                    "w": 63.0,
+                    "vel": 1.0
+                },
+                {
+                    "id_pose": 9,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 6.21,
+                    "lat": 23.2892131,
+                    "lon": 46.66624285,
+                    "alt": 8.0,
+                    "x_loc": 15.11,
+                    "y_loc": 0.12,
+                    "z_loc": 8.0,
+                    "w": 63.0,
+                    "vel": 1.0
+                }
+            ]
+        },
+        {
+            "Task_id": 7,
+            "code": 21,
+            "time_start": 242.0,
+            "time_dur": 16.0,
+            "poses": [
+                {
+                    "id_pose": -1,
+                    "stat_id": -1,
+                    "drone_id": -1,
+                    "id_in_line": -1,
+                    "t": 0,
+                    "lat": -1,
+                    "lon": -1,
+                    "alt": -1,
+                    "x_loc": -1,
+                    "y_loc": -1,
+                    "z_loc": -1,
+                    "w": -1,
+                    "vel": 0.5
+                }
+            ]
+        }
+    ]
+}
