@@ -1,0 +1,5 @@
+<launch>
+	<!-- Run -->
+	<node pkg="mission_evaluation" name="mission" type="node.py" output="screen"> </node> 
+	
+</launch>

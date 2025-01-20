@@ -132,6 +132,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/sim/UDH2025_robotics/catkin_ws/build/gtest/cmake_install.cmake")
   include("/home/sim/UDH2025_robotics/catkin_ws/build/drones_sim/cmake_install.cmake")
+  include("/home/sim/UDH2025_robotics/catkin_ws/build/mission_evaluation/cmake_install.cmake")
 
 endif()
 

@@ -1,0 +1,8 @@
+prefix=/home/sim/UDH2025_robotics/catkin_ws/install
+
+Name: mission_evaluation
+Description: Description of mission_evaluation
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -250,7 +250,7 @@
         <collision name="start_area_collision">
           <geometry>
             <box>
-              <size>25 25 0.5</size> 
+              <size>30 30 0.5</size> 
             </box>
           </geometry>
           <surface>
@@ -265,7 +265,7 @@
         <visual name="start_area_visual">
           <geometry>
             <box>
-              <size>25 25 0.5</size> 
+              <size>30 30 0.5</size> 
             </box>
           </geometry>
           <material>

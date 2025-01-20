@@ -1,2 +1,2 @@
-drones_sim
+drones_sim:mission_evaluation
 -DCATKIN_DEVEL_PREFIX=/home/sim/UDH2025_robotics/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/sim/UDH2025_robotics/catkin_ws/install -G Unix Makefiles

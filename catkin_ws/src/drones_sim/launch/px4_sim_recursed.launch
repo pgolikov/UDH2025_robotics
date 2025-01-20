@@ -20,15 +20,14 @@
 		</include>
 	</group>
 
-    	<!-- Run the drone control script for each drone -->
-    	<node pkg="drones_sim" name="drone_$(arg n)" type="px4_drone.py" output="screen">
-        	<param name="drone" value="$(arg n)" />
-    	</node> 
+	<!-- Run the drone control script for each drone -->
+	<node pkg="drones_sim" name="drone_$(arg n)" type="px4_drone.py" output="screen">
+		<param name="drone" value="$(arg n)" />
+	</node> 
 
 	<!-- Recursively start new node -->
 	<include file="$(find drones_sim)/launch/px4_sim_recursed.launch" if="$(eval arg('n') - 1 > 0)">
 		<arg name="n" value="$(eval arg('n') - 1)"/>
 	</include>
 
-	
 </launch>
