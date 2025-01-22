@@ -30,6 +30,4 @@
 		<arg name="n" value="$(eval arg('n') - 1)"/>
 	</include>
 
-	<param name="use_sim_time" value="true" />
-
 </launch>

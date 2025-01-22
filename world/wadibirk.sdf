@@ -8,8 +8,6 @@
       <real_time_update_rate>250</real_time_update_rate>
     </physics>
 
-    <!-- <plugin name="gz_sim_ros1_clock" filename="libgz_sim_ros1_clock.so" /> -->
-
     <model name="heightmap">
       <static>true</static>
       <link name="link">
