@@ -1,0 +1,66 @@
+# Windows 10 WSL2 and Docker Setup Guide
+
+## 1. Install Windows 10 Update 21H2
+If you cannot install it through the Windows Update Center, follow the instructions provided in this guide:
+[How to Install Windows 10 Update 21H2](https://www.comss.ru/page.php?id=9317)
+
+## 2. Enable Intel Virtualization Technology in BIOS
+Navigate to the following path in BIOS settings and enable Intel Virtualization Technology:
+```
+Advanced > CPU Configuration > Intel Virtualization Technology
+```
+
+## 3. Install WSL2
+Follow the steps outlined in the Microsoft documentation:
+[Install WSL2 on Windows](https://docs.microsoft.com/ru-ru/windows/wsl/install)
+
+Run these commands in Microsoft PowerShell to install WSL2 with Ubuntu 20.04:
+```powershell
+wsl --install -d ubuntu
+wsl --set-version ubuntu 2
+```
+
+## 4. Install VcXrvc for GUI output 
+https://sourceforge.net/projects/vcxsrv/
+- Set Display number to 0
+- In the last window, put "Disable access control"
+
+# Next steps run insde WSL UBUNTU
+
+## 4. Install Docker
+Follow the official Docker installation guide:
+[Install Docker on Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+### Configure Docker
+After installing Docker, set it up for your environment. Ensure that Docker Compose is also installed. Refer to the [Docker Compose Installation Guide](https://docs.docker.com/compose/install/).
+
+## 5. Install NVIDIA Container Toolkit
+Follow the "Installing with Apt" section of the NVIDIA Container Toolkit guide:
+[Install NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+
+Run the following commands to configure and restart the required services:
+```bash
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+sudo nvidia-ctk runtime configure --runtime=containerd
+sudo systemctl restart containerd
+```
+
+## 6. Install Xhost
+Install the `xhost` utility to enable GUI applications in containers:
+```bash
+sudo apt install x11-xserver-utils
+```
+
+Run the following command to configure `xhost`:
+```bash
+xhost +local:docker
+```
+
+Add those lines to the ~/.bashrc file from the terminal. 
+Write your pc ip to - <YOUR_PC_IP> (192.168.10.1)
+```bash
+echo -e "export DISPLAY=<YOUR_PC_IP>:0.0\nexport GAZEBO_IP=127.0.0.1\nexport LIBGL_ALWAYS_INDIRECT=0" >> ~/.bashrc
+```
+
+Next, follow 0. docker.md
