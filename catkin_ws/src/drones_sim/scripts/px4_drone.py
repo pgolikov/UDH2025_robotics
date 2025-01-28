@@ -22,13 +22,11 @@ from geographic_msgs.msg import GeoPointStamped
 import threading
 import time
 
-CONDITION_RECORDED_TIME = 20 #sec
-SESMIC_SOURCE_PERIOD = 30 #sec
-FLGIHT_TIME_PER_BAT = 1200 #sec, 20 min
 
 class Battery:
     def __init__(self):
-        self.time = FLGIHT_TIME_PER_BAT
+        self.time_full_time = rospy.get_param('/FLGIHT_TIME_PER_BAT')
+        self.time = self.time_full_time
         self.armed = False
         self.drone_id = None
         self.is_active = True
@@ -71,7 +69,7 @@ class Battery:
         return self.is_active
 
     def recharge(self):
-        self.time = FLGIHT_TIME_PER_BAT
+        self.time = self.time_full_time
         self.is_active = True
 
     def update_value(self):
@@ -89,7 +87,8 @@ class Drone:
     def __init__(self):
         self.uav_name = str(rospy.get_param(rospy.get_name() + '/drone'))
         rospy.loginfo("INIT-" + self.uav_name + "-DRONE")
-    
+        self.CONDITION_RECORDED_TIME = rospy.get_param('/CONDITION_RECORDED_TIME')       
+
         self.battery = Battery()
 
         self.pose = None
@@ -122,7 +121,7 @@ class Drone:
         rospy.Subscriber('/uav' + self.uav_name + '/mavros/local_position/pose', PoseStamped, self.drone_pose_callback)
         rospy.Subscriber('/uav' + self.uav_name + '/mavros/global_position/global', NavSatFix, self.gps_callback)
 
-        self.pathname_task_list = "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/mission/"        
+        self.pathname_task_list = str(rospy.get_param('/pathname_task_list'))       
         self.filename_task_list = 'task_list_ASAD' + self.uav_name + '.json'
 
         self.mission_path = self.read_mission_json()
@@ -130,7 +129,7 @@ class Drone:
         # Example for recording data
         self.id_rec_point = 0
         self.df = None
-        self.pathname_recording_list = "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/mission/"
+        self.pathname_recording_list = str(rospy.get_param('/pathname_recording_list')) 
         self.filename_recording_list = 'preplan_ASAD' + self.uav_name + '.csv'
         self.read_recording_points()
         self.point_recording_pub = rospy.Publisher('/recording_points', String, queue_size=1)
@@ -396,7 +395,7 @@ class Drone:
         rospy.loginfo("Recording START")
         self.start_recording()
         while self.is_recording:
-            # rospy.sleep(CONDITION_RECORDED_TIME + 2) # just wait some time or /
+            # rospy.sleep(self.CONDITION_RECORDED_TIME + 2) # just wait some time or /
             # self.is_recording = False
             self.rate.sleep() # / or wait for topic callback
         rospy.loginfo("Recording END")

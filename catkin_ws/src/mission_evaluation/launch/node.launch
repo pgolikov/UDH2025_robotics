@@ -1,4 +1,8 @@
 <launch>
+
+    <!-- Load params of the mission -->
+    <rosparam command="load" file="$(find mission_evaluation)/config/config.yaml" />
+
 	<!-- Run -->
 	<node pkg="mission_evaluation" name="mission" type="node.py" output="screen"> </node> 
 	

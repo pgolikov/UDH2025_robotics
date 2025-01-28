@@ -1,0 +1,5 @@
+CONDITION_RECORDED_TIME: 20 #sec
+FLGIHT_TIME_PER_BAT: 1200 #sec
+
+pathname_task_list: "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/mission/"
+pathname_recording_list: "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/mission/"

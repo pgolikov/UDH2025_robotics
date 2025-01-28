@@ -1,0 +1,6 @@
+CONDITION_DIST_REC_POINT: 5 #sec
+CONDITION_RECORDED_TIME: 20 #sec
+SESMIC_SOURCE_PERIOD: 30 #sec
+
+preplan_file: "/home/sim/UDH2025_robotics/input_data/preplan_test.csv"
+charging_stations_file: "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/mission/charging_stations.csv"

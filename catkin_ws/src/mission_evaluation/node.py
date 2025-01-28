@@ -12,14 +12,16 @@ import math
 import threading
 import time
 
-CONDITION_DIST_REC_POINT = 5.0 #m
-CONDITION_RECORDED_TIME = 20 #sec
-SESMIC_SOURCE_PERIOD = 30 #sec
+
 
 class Mission:
     def __init__(self):
         self.rate = rospy.Rate(20)
-        self.preplan_file = "/home/sim/UDH2025_robotics/input_data/preplan_test.csv"
+        self.CONDITION_DIST_REC_POINT = rospy.get_param('/CONDITION_DIST_REC_POINT')
+        self.CONDITION_RECORDED_TIME = rospy.get_param('/CONDITION_RECORDED_TIME')
+        self.SESMIC_SOURCE_PERIOD = rospy.get_param('/SESMIC_SOURCE_PERIOD')
+
+        self.preplan_file = str(rospy.get_param('/preplan_file'))
         self.df = None
         self.read_recording_points()
 
@@ -43,7 +45,7 @@ class Mission:
             rospy.Subscriber(topic_name, NavSatFix, self.drone_poses_callback, callback_args=f"uav{drone_id}")
 
         # Init charging_stations
-        self.charging_stations_file = "/home/sim/UDH2025_robotics/catkin_ws/src/drones_sim/mission/charging_stations.csv"
+        self.charging_stations_file = str(rospy.get_param('/charging_stations_file'))
         self.df_charging = None
         self.read_charging_stations()
         rospy.Subscriber('/charging_stations', String, self.charging_stations_callback)
@@ -62,7 +64,7 @@ class Mission:
     def update_value(self):
         while True:
             # Check if source ready
-            if self.source_counter == SESMIC_SOURCE_PERIOD:
+            if self.source_counter == self.SESMIC_SOURCE_PERIOD:
                 for i in range(len(self.df)):
                     if self.df.at[i, 'status'] == 'wait_source':
                         self.df.at[i, 'status'] = "recording"
@@ -73,10 +75,10 @@ class Mission:
                 if self.df.at[i, 'status'] == 'recording':
                     self.df.at[i, 'recorded_time'] += 1  # Update the 'recording_time' column with seconds
                     
-                    if self.df.at[i, 'recorded_time'] < CONDITION_RECORDED_TIME:
+                    if self.df.at[i, 'recorded_time'] < self.CONDITION_RECORDED_TIME:
                         self.result_recording_pub.publish(str(self.df.iloc[i].tolist()))
 
-                    if self.df.at[i, 'recorded_time'] >= CONDITION_RECORDED_TIME and self.df.at[i, 'status'] == "recording":
+                    if self.df.at[i, 'recorded_time'] >= self.CONDITION_RECORDED_TIME and self.df.at[i, 'status'] == "recording":
                         self.df.at[i, 'status'] = "done"
                         self.df.at[i, 'is_recorded'] = True
                         self.result_recording_pub.publish(str(self.df.iloc[i].tolist()))
@@ -134,7 +136,7 @@ class Mission:
             distance = self.haversine(target_pose, uav_data)
             # print("distance:", round(distance, 2), " m")
 
-            if distance <= CONDITION_DIST_REC_POINT: 
+            if distance <= self.CONDITION_DIST_REC_POINT: 
                 self.df.at[target_row_index, 'drone_id'] = 'uav' + drone_id
                 self.df.at[target_row_index, 'status'] = "wait_source"               
 

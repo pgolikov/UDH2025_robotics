@@ -2,6 +2,9 @@
 	<!-- Number of drones -->
 	<arg name="n" default="1"/> 
 
+    <!-- Load params of the mission -->
+    <rosparam command="load" file="$(find drones_sim)/config/config.yaml" />
+
 	<!-- Start px4 -->
 	<group ns="$(eval 'uav' + str(arg('n')))">
 		<arg name="fcu_url" default="$(eval 'udp://:' + str(14540+arg('n')) + '@localhost:' + str(14580+arg('n')))"/>
